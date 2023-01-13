@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Weather</title>
+		<link rel="stylesheet" href="src/styles.css" />
+		<!-- CSS only -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+			crossorigin="anonymous"
+		/>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<!-- https://chessy969358.invisionapp.com/freehand/SheCodes-Weather-Website-7CxnuvCmO?dsid_h=3008d4dcd9c636e91fedd8604088ab77509649a1fee4cdec6c7ace57d47099b1&uid_h=dfddab8b9824e6b314d1587b113f6d262503027f6588464d15fc5dcad3f808a5 -->
+		<div class="container">
+			<div class="row" id="heading">
+				<div class="col">
+					<h1>my Weather</h1>
+				</div>
+				<div class="col align-self-end">
+					<form action="" id="searchForm">
+						<div class="input-group mb-3">
+							<input
+								type="text"
+								class="form-control"
+								placeholder="get your weather in ..."
+								id="citySearch"
+								aria-label="City Search"
+								aria-describedby="basic-addon2"
+							/>
+							<div class="input-group-append">
+								<button
+									class="btn btn-outline-secondary"
+									type="button"
+									id="citySearchButton"
+								>
+									<img
+										id="searchIcon"
+										src="images/search.svg"
+										alt=""
+										width="20"
+									/>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div id="main">
+				<div class="row" id="currentCity">
+					<div class="col">
+						<p>Weather in <span id="currentCityName">Munich</span></p>
+					</div>
+					<div class="col text-right">
+						<a href="#" id="CurrentLocation"
+							><span
+								style="font-weight: normal"
+								title="find weather at current location"
+								>🚩</span
+							></a
+						>
+					</div>
+				</div>
+				<div class="row" id="currentWeather">
+					<div class="col">
+						<p>
+							<span id="emoji">⛅</span> <span id="temperatureValue">11</span
+							><span id="temperatureScale">°C</span>
+						</p>
+					</div>
+				</div>
+				<hr />
+				<div class="row" id="forcast">
+					<div class="col">
+						<p>Nov. 4</p>
+						<p class="weekDay">tomorrow</p>
+						<p class="temperature">
+							<span class="temperatureValue">15</span
+							><span class="temperatureScale">°C</span>
+						</p>
+						<p class="emoji">🌞</p>
+					</div>
+					<div class="col">
+						<p>Nov. 5</p>
+						<p class="weekDay">Sunday</p>
+						<p class="temperature">
+							<span class="temperatureValue">16</span
+							><span class="temperatureScale">°C</span>
+						</p>
+						<p class="emoji">🌞</p>
+					</div>
+					<div class="col">
+						<p>Nov. 6</p>
+						<p class="weekDay">Monday</p>
+						<p class="temperature">
+							<span class="temperatureValue">12</span
+							><span class="temperatureScale">°C</span>
+						</p>
+						<p class="emoji">☁</p>
+					</div>
+					<div class="col">
+						<p>Nov. 7</p>
+						<p class="weekDay">Tuesday</p>
+						<p class="temperature">
+							<span class="temperatureValue">9</span
+							><span class="temperatureScale">°C</span>
+						</p>
+						<p class="emoji">🌧</p>
+					</div>
+					<div class="col">
+						<p>Nov. 8</p>
+						<p class="weekDay">Wednesday</p>
+						<p class="temperature">
+							<span class="temperatureValue">13</span
+							><span class="temperatureScale">°C</span>
+						</p>
+						<p class="emoji">⛅</p>
+					</div>
+				</div>
+			</div>
+			<div id="footer">
+				<p id="currentDate">Tuesday 16:00</p>
+			</div>
+		</div>
+		<script src="src/index.js"></script>
+	</body>
+</html>

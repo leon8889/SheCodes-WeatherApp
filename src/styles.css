@@ -1,0 +1,97 @@
+.text-right {
+	text-align: right !important;
+}
+
+.container {
+	background-color: white;
+	border: 2px solid gray;
+	border-radius: 30px 1px 0px 0px;
+	padding-bottom: 1px;
+	margin-bottom: 10px;
+}
+
+#heading {
+	background-color: #10658e;
+	color: white;
+	border-radius: 28px 0px 0px 0px;
+	padding: 10px;
+}
+
+#heading h1 {
+	font-weight: bold;
+	font-size: 45px;
+}
+
+#citySearch {
+	font-size: 12px;
+}
+
+#citySearchButton {
+	background-color: #ffb900;
+	border-color: #ffb900;
+	border-radius: 0px 40px 40px 0px;
+	transition: all 200ms ease-in-out;
+}
+
+#citySearchButton:hover {
+	background-color: #e2a601fd;
+	border-color: #e2a601fd;
+}
+
+#searchIcon {
+	transform: translate(0px, -2px);
+}
+
+#main {
+	background-color: #77b3ce;
+	margin-top: 100px;
+	padding: 10px;
+	margin-bottom: 100px;
+	border-radius: 10px;
+}
+
+#currentCity {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+#currentWeather {
+	font-size: 55px;
+	font-weight: bold;
+}
+
+#currentWeather .emoji {
+	font-size: 55px;
+}
+
+#currentWeather .temperature {
+	font-size: 75px;
+	font-weight: bold;
+}
+
+#CurrentLocation {
+	font-size: 20px;
+	text-decoration: none;
+}
+
+#forcast {
+	font-size: 18px;
+	text-align: center;
+}
+
+#forcast .weekDay {
+	font-size: larger;
+	font-weight: bolder;
+}
+
+#forcast .temperature {
+	font-size: larger;
+}
+
+#forcast .emoji {
+	font-size: 35px;
+}
+
+#currentDate {
+	text-align: right;
+}
