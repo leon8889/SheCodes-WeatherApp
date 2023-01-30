@@ -55,6 +55,10 @@
 	font-weight: bold;
 }
 
+#currentCity #currentCityName::first-letter {
+	text-transform: capitalize;
+}
+
 #currentWeather {
 	font-size: 55px;
 	font-weight: bold;
@@ -67,6 +71,42 @@
 #currentWeather .temperature {
 	font-size: 75px;
 	font-weight: bold;
+}
+
+#currentWeather .units {
+	font-size: 20px;
+	position: relative;
+	top: -25px;
+}
+
+#currentWeather .units .active {
+	font-size: 55px;
+	text-decoration: none;
+	color: black;
+	position: relative;
+	top: 25px;
+}
+
+#currentWeather .units .active:hover {
+	cursor: default;
+}
+
+#currentWeather ul {
+	padding-top: 15px;
+}
+
+#currentWeather li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: block;
+	font-size: 16px;
+	height: 18.8889px;
+	line-height: 19.2px;
+}
+
+#currentWeather li::first-letter {
+	text-transform: capitalize;
 }
 
 #CurrentLocation {

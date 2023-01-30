@@ -4,8 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Weather</title>
-		<link rel="stylesheet" href="src/styles.css" />
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<!-- CSS only -->
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -13,7 +12,8 @@
 			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 			crossorigin="anonymous"
 		/>
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<link rel="stylesheet" href="src/styles.css" />
+		<title>My Weather</title>
 	</head>
 	<body>
 		<!-- https://chessy969358.invisionapp.com/freehand/SheCodes-Weather-Website-7CxnuvCmO?dsid_h=3008d4dcd9c636e91fedd8604088ab77509649a1fee4cdec6c7ace57d47099b1&uid_h=dfddab8b9824e6b314d1587b113f6d262503027f6588464d15fc5dcad3f808a5 -->
@@ -36,7 +36,7 @@
 							<div class="input-group-append">
 								<button
 									class="btn btn-outline-secondary"
-									type="button"
+									type="submit"
 									id="citySearchButton"
 								>
 									<img
@@ -70,12 +70,22 @@
 					<div class="col">
 						<p>
 							<span id="emoji">⛅</span> <span id="temperatureValue">11</span
-							><span id="temperatureScale">°C</span>
+							><span class="units"
+								><a href="#" id="celsius-link" class="active">°C</a> |
+								<a href="#" id="fahrenheit-link">°F</a></span
+							>
 						</p>
 					</div>
+					<div class="col">
+						<ul>
+							<li><span id="description">Clear</span></li>
+							<li>Humidity: <span id="humidity">73</span>%</li>
+							<li>Wind: <span id="wind">2</span> km/h</li>
+						</ul>
+					</div>
 				</div>
-				<hr />
-				<div class="row" id="forcast">
+				<!-- <hr /> -->
+				<!-- <div class="row" id="forcast">
 					<div class="col">
 						<p>Nov. 4</p>
 						<p class="weekDay">tomorrow</p>
@@ -121,7 +131,7 @@
 						</p>
 						<p class="emoji">⛅</p>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div id="footer">
 				<div class="row">

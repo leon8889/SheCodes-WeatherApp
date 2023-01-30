@@ -1,23 +1,16 @@
-let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+// **************
+// Functions
+// **************
 
 function getWeather4CityXY(event) {
 	event.preventDefault();
 
 	// get city name
-	let cityField = document.querySelector("#citySearch");
+	let cityInputElement = document.querySelector("#citySearch");
 
-	if (cityField.value) {
-		let city = capitalize(cityField.value.trim());
+	if (cityInputElement.value) {
+		let city = cityInputElement.value.trim();
 		getWeatherFromAPIByCity(city);
-
-		// let forcast = document.querySelectorAll("#forcast .col");
-		// forcast.forEach(function (item) {
-		// 	let randomWeather = getRandomWeather(scale);
-		// 	let forcastTemp = item.querySelector(".temperatureValue");
-		// 	forcastTemp.innerHTML = randomWeather[0];
-		// 	let forcastEmoji = item.querySelector(".emoji");
-		// 	forcastEmoji.innerHTML = randomWeather[1];
-		// });
 	}
 }
 
@@ -28,10 +21,10 @@ function getWeather4PositionXY(event) {
 
 function getWeatherFromAPIByCity(city) {
 	let apiUrl =
-		"https://api.openweathermap.org/data/2.5/weather?q=" +
+		"https://api.shecodes.io/weather/v1/current?query=" +
 		city +
 		"&units=metric" +
-		"&appid=" +
+		"&key=" +
 		apiKey;
 
 	axios.get(apiUrl).then(changeWeatherData);
@@ -39,12 +32,12 @@ function getWeatherFromAPIByCity(city) {
 
 function getWeatherFromAPIByLocation(position) {
 	let apiUrl =
-		"https://api.openweathermap.org/data/2.5/weather?lat=" +
+		"https://api.shecodes.io/weather/v1/current?lat=" +
 		position.coords.latitude +
 		"&lon=" +
 		position.coords.longitude +
 		"&units=metric" +
-		"&appid=" +
+		"&key=" +
 		apiKey;
 
 	axios.get(apiUrl).then(changeWeatherData);
@@ -52,43 +45,72 @@ function getWeatherFromAPIByLocation(position) {
 
 function changeWeatherData(response) {
 	if (response.status == 200) {
-		let temp = Math.round(response.data.main.temp);
-		let icon = response.data.weather[0].icon;
-
 		// change city name
-		let cityName = document.querySelector("#currentCityName");
-		cityName.innerHTML = response.data.name;
+		let cityNameElement = document.querySelector("#currentCityName");
+		cityNameElement.innerHTML = response.data.city;
 
 		// change temperature
-		let currentTemp = document.querySelector("#temperatureValue");
-		currentTemp.innerHTML = temp;
+		celsiusTemperature = Math.round(response.data.temperature.current);
+		let currentTempElement = document.querySelector("#temperatureValue");
+		if (fahrenheitLink.classList.contains("active")) {
+			currentTempElement.innerHTML = convertCtoF(celsiusTemperature);
+		} else {
+			currentTempElement.innerHTML = celsiusTemperature;
+		}
 
 		// change icon
-		let currentEmoji = document.querySelector("#emoji");
-		currentEmoji.innerHTML =
-			'<img id="wicon" src="' + getEmoji(icon) + '" alt="Weather icon">';
+		let currentIconElement = document.querySelector("#emoji");
+		currentIconElement.setAttribute("src", response.data.condition.icon_url);
+		currentIconElement.setAttribute("alt", response.data.condition.icon);
+
+		// change description
+		let descriptionElement = document.querySelector("#description");
+		descriptionElement.innerHTML = response.data.condition.description;
+
+		// change humidity
+		let humidityElement = document.querySelector("#humidity");
+		humidityElement.innerHTML = response.data.temperature.humidity;
+
+		// change wind speed
+		let windElement = document.querySelector("#wind");
+		windElement.innerHTML = Math.round(response.data.wind.speed);
 	} else {
 		console.log(`${response.status}: Response Error`);
 	}
 }
 
-function getEmoji(icon) {
-	let iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
-	return iconUrl;
+function displayFahrenheitTemperature(event) {
+	event.preventDefault();
+	let fahrenheitTemperature = convertCtoF(celsiusTemperature);
+	let currentTempElement = document.querySelector("#temperatureValue");
+	currentTempElement.innerHTML = fahrenheitTemperature;
+	celsiusLink.classList.remove("active");
+	fahrenheitLink.classList.add("active");
 }
 
-function capitalize(string) {
-	let array = string.split(/[-\s]/);
-	let returnValue = "";
-	array.forEach(concat);
-	function concat(item) {
-		returnValue +=
-			item.charAt(0).toUpperCase() + item.slice(1).toLowerCase() + " ";
-	}
-	return returnValue.trim();
+function displayCelsiusTemperature(event) {
+	event.preventDefault();
+	let currentTempElement = document.querySelector("#temperatureValue");
+	currentTempElement.innerHTML = celsiusTemperature;
+	celsiusLink.classList.add("active");
+	fahrenheitLink.classList.remove("active");
 }
 
-// get current date
+function convertCtoF(temp) {
+	return Math.round(temp * 1.8 + 32);
+}
+
+// **************
+// Globals
+// **************
+
+// SheCodesWeatherAPI
+// https://www.shecodes.io/learn/workshops/1021/apis/weather
+let apiKey = "tb533a02o404f422da6058f58bb72fcc";
+
+let celsiusTemperature = null;
+let city = "Munich";
+
 let days = [
 	"Sunday",
 	"Monday",
@@ -98,19 +120,41 @@ let days = [
 	"Friday",
 	"Saturday",
 ];
+
+// **************
+// Main
+// **************
+
+// get current date
 let now = new Date();
+let day = days[now.getDay()];
+let hours = now.getHours();
+let minutes = now.getMinutes();
+if (hours < 10) {
+	hours = "0" + hours;
+}
+if (minutes < 10) {
+	minutes = "0" + minutes;
+}
 
 let currentDate = document.querySelector("#currentDate");
-currentDate.innerHTML =
-	days[now.getDay()] + " " + now.getHours() + ":" + now.getMinutes();
+currentDate.innerHTML = day + " " + hours + ":" + minutes;
+
+// Default weather search for Munich
+getWeatherFromAPIByCity(city);
 
 // react to search button
-let searchButton = document.querySelector("#citySearchButton");
-searchButton.addEventListener("click", getWeather4CityXY);
-
 let searchForm = document.querySelector("#searchForm");
 searchForm.addEventListener("submit", getWeather4CityXY);
 
 // react to "get current location" button
 let currentLocation = document.querySelector("#CurrentLocation");
 currentLocation.addEventListener("click", getWeather4PositionXY);
+
+// react to fahrenheit link
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+// react to celsius link
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
