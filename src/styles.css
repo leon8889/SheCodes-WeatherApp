@@ -44,7 +44,7 @@
 }
 
 #main {
-	background-color: #77b3ce;
+	background-color: #88bed6;
 	margin-top: 100px;
 	padding: 10px;
 	margin-bottom: 100px;
@@ -74,24 +74,6 @@
 	font-weight: bold;
 }
 
-#currentWeather .units {
-	font-size: 20px;
-	position: relative;
-	top: -25px;
-}
-
-#currentWeather .units .active {
-	font-size: 55px;
-	text-decoration: none;
-	color: black;
-	position: relative;
-	top: 25px;
-}
-
-#currentWeather .units .active:hover {
-	cursor: default;
-}
-
 #currentWeather ul {
 	padding-top: 15px;
 }
@@ -116,17 +98,32 @@
 }
 
 #forcast {
-	font-size: 18px;
+	font-size: 16px;
 	text-align: center;
+	line-height: 40px;
 }
 
 #forcast .weekDay {
-	font-size: larger;
+	font-size: 18px;
 	font-weight: bolder;
 }
 
 #forcast .temperature {
-	font-size: larger;
+	font-size: 20px;
+	line-height: 25px;
+	/* width: 80px; */
+}
+
+#forcast .temperatureLabel {
+	font-size: 14px;
+}
+
+#forcast .temperatureMax {
+	margin-top: 10px;
+}
+
+#forcast .temperatureMin {
+	border-top: 0.5px dashed rgb(105, 105, 105);
 }
 
 #forcast .emoji {

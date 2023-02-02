@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<!-- CSS only -->
 		<link
@@ -69,11 +70,8 @@
 				<div class="row" id="currentWeather">
 					<div class="col">
 						<p>
-							<span id="emoji">⛅</span> <span id="temperatureValue">11</span
-							><span class="units"
-								><a href="#" id="celsius-link" class="active">°C</a> |
-								<a href="#" id="fahrenheit-link">°F</a></span
-							>
+							<img src="" alt="Weather Icon" id="emoji" />
+							<span id="temperatureValue">11</span><span class="units">°C</span>
 						</p>
 					</div>
 					<div class="col">
@@ -84,54 +82,94 @@
 						</ul>
 					</div>
 				</div>
-				<!-- <hr /> -->
-				<!-- <div class="row" id="forcast">
+				<hr />
+				<div class="row" id="forcast">
 					<div class="col">
-						<p>Nov. 4</p>
-						<p class="weekDay">tomorrow</p>
-						<p class="temperature">
-							<span class="temperatureValue">15</span
-							><span class="temperatureScale">°C</span>
-						</p>
-						<p class="emoji">🌞</p>
+						<div id="forcast-date-0">Nov. 4</div>
+						<div class="weekDay" id="forcast-day-0">tomorrow</div>
+						<div class="temperature temperatureMax">
+							<span class="temperatureLabel">max. </span>
+							<span class="temperatureValue" id="forcast-temp-max-0">15</span>
+							<span>°C</span>
+						</div>
+						<div class="temperature temperatureMin">
+							<span class="temperatureLabel">min. </span>
+							<span class="temperatureValue" id="forcast-temp-min-0">10</span>
+							<span>°C</span>
+						</div>
+						<div class="emoji">
+							<img src="" alt="Weather Icon" id="forcast-emoji-0" />
+						</div>
 					</div>
 					<div class="col">
-						<p>Nov. 5</p>
-						<p class="weekDay">Sunday</p>
-						<p class="temperature">
-							<span class="temperatureValue">16</span
-							><span class="temperatureScale">°C</span>
-						</p>
-						<p class="emoji">🌞</p>
+						<div id="forcast-date-1">Nov. 5</div>
+						<div class="weekDay" id="forcast-day-1">Sunday</div>
+						<div class="temperature temperatureMax">
+							<span class="temperatureLabel">max. </span>
+							<span class="temperatureValue" id="forcast-temp-max-1">15</span>
+							<span>°C</span>
+						</div>
+						<div class="temperature temperatureMin">
+							<span class="temperatureLabel">min. </span>
+							<span class="temperatureValue" id="forcast-temp-min-1">10</span>
+							<span>°C</span>
+						</div>
+						<div class="emoji">
+							<img src="" alt="Weather Icon" id="forcast-emoji-1" />
+						</div>
 					</div>
 					<div class="col">
-						<p>Nov. 6</p>
-						<p class="weekDay">Monday</p>
-						<p class="temperature">
-							<span class="temperatureValue">12</span
-							><span class="temperatureScale">°C</span>
-						</p>
-						<p class="emoji">☁</p>
+						<div id="forcast-date-2">Nov. 6</div>
+						<div class="weekDay" id="forcast-day-2">Monday</div>
+						<div class="temperature temperatureMax">
+							<span class="temperatureLabel">max. </span>
+							<span class="temperatureValue" id="forcast-temp-max-2">15</span>
+							<span>°C</span>
+						</div>
+						<div class="temperature temperatureMin">
+							<span class="temperatureLabel">min. </span>
+							<span class="temperatureValue" id="forcast-temp-min-2">10</span>
+							<span>°C</span>
+						</div>
+						<div class="emoji">
+							<img src="" alt="Weather Icon" id="forcast-emoji-2" />
+						</div>
 					</div>
 					<div class="col">
-						<p>Nov. 7</p>
-						<p class="weekDay">Tuesday</p>
-						<p class="temperature">
-							<span class="temperatureValue">9</span
-							><span class="temperatureScale">°C</span>
-						</p>
-						<p class="emoji">🌧</p>
+						<div id="forcast-date-3">Nov. 7</div>
+						<div class="weekDay" id="forcast-day-3">Tuesday</div>
+						<div class="temperature temperatureMax">
+							<span class="temperatureLabel">max. </span>
+							<span class="temperatureValue" id="forcast-temp-max-3">15</span>
+							<span>°C</span>
+						</div>
+						<div class="temperature temperatureMin">
+							<span class="temperatureLabel">min. </span>
+							<span class="temperatureValue" id="forcast-temp-min-3">10</span>
+							<span>°C</span>
+						</div>
+						<div class="emoji">
+							<img src="" alt="Weather Icon" id="forcast-emoji-3" />
+						</div>
 					</div>
 					<div class="col">
-						<p>Nov. 8</p>
-						<p class="weekDay">Wednesday</p>
-						<p class="temperature">
-							<span class="temperatureValue">13</span
-							><span class="temperatureScale">°C</span>
-						</p>
-						<p class="emoji">⛅</p>
+						<div id="forcast-date-4">Nov. 8</div>
+						<div class="weekDay" id="forcast-day-4">Wednesday</div>
+						<div class="temperature temperatureMax">
+							<span class="temperatureLabel">max. </span>
+							<span class="temperatureValue" id="forcast-temp-max-4">15</span>
+							<span>°C</span>
+						</div>
+						<div class="temperature temperatureMin">
+							<span class="temperatureLabel">min. </span>
+							<span class="temperatureValue" id="forcast-temp-min-4">10</span>
+							<span>°C</span>
+						</div>
+						<div class="emoji">
+							<img src="" alt="Weather Icon" id="forcast-emoji-4" />
+						</div>
 					</div>
-				</div> -->
+				</div>
 			</div>
 			<div id="footer">
 				<div class="row">

@@ -49,14 +49,25 @@ function changeWeatherData(response) {
 		let cityNameElement = document.querySelector("#currentCityName");
 		cityNameElement.innerHTML = response.data.city;
 
+		// change date
+		let currentDate = getDate(response.data.time * 1000);
+		let currentDateElement = document.querySelector("#currentDate");
+		currentDateElement.innerHTML =
+			currentDate["weekDay"] +
+			", " +
+			currentDate["month"] +
+			". " +
+			currentDate["day"] +
+			" " +
+			currentDate["hours"] +
+			":" +
+			currentDate["minutes"];
+
 		// change temperature
-		celsiusTemperature = Math.round(response.data.temperature.current);
 		let currentTempElement = document.querySelector("#temperatureValue");
-		if (fahrenheitLink.classList.contains("active")) {
-			currentTempElement.innerHTML = convertCtoF(celsiusTemperature);
-		} else {
-			currentTempElement.innerHTML = celsiusTemperature;
-		}
+		currentTempElement.innerHTML = Math.round(
+			response.data.temperature.current
+		);
 
 		// change icon
 		let currentIconElement = document.querySelector("#emoji");
@@ -74,30 +85,86 @@ function changeWeatherData(response) {
 		// change wind speed
 		let windElement = document.querySelector("#wind");
 		windElement.innerHTML = Math.round(response.data.wind.speed);
+
+		// forcast
+		getWeatherForcastFromAPIByCity(response.data.city);
 	} else {
 		console.log(`${response.status}: Response Error`);
 	}
 }
 
-function displayFahrenheitTemperature(event) {
-	event.preventDefault();
-	let fahrenheitTemperature = convertCtoF(celsiusTemperature);
-	let currentTempElement = document.querySelector("#temperatureValue");
-	currentTempElement.innerHTML = fahrenheitTemperature;
-	celsiusLink.classList.remove("active");
-	fahrenheitLink.classList.add("active");
+function getWeatherForcastFromAPIByCity(city) {
+	let apiUrl =
+		"https://api.shecodes.io/weather/v1/forecast?query=" +
+		city +
+		"&units=metric" +
+		"&key=" +
+		apiKey;
+
+	axios.get(apiUrl).then(changeWeatherForcastData);
 }
 
-function displayCelsiusTemperature(event) {
-	event.preventDefault();
-	let currentTempElement = document.querySelector("#temperatureValue");
-	currentTempElement.innerHTML = celsiusTemperature;
-	celsiusLink.classList.add("active");
-	fahrenheitLink.classList.remove("active");
+function changeWeatherForcastData(response) {
+	if (response.status == 200) {
+		let forecast = response.data.daily;
+
+		forecast.forEach(function (forecastDay, index) {
+			if (index < 5) {
+				let forcastDate = getDate(forecastDay.time * 1000);
+
+				// change date
+				let forcastDateElement = document.querySelector(
+					"#forcast-date-" + index
+				);
+				forcastDateElement.innerHTML =
+					forcastDate["month"] + ". " + forcastDate["day"];
+
+				// change week day
+				if (index > 0) {
+					let forcastDayElement = document.querySelector(
+						"#forcast-day-" + index
+					);
+					forcastDayElement.innerHTML = forcastDate["weekDay"];
+				}
+
+				// change temperature
+				let forcastTempMaxElement = document.querySelector(
+					"#forcast-temp-max-" + index
+				);
+				forcastTempMaxElement.innerHTML = Math.round(
+					forecastDay.temperature.maximum
+				);
+				let forcastTempMinElement = document.querySelector(
+					"#forcast-temp-min-" + index
+				);
+				forcastTempMinElement.innerHTML = Math.round(
+					forecastDay.temperature.minimum
+				);
+
+				// change icon
+				let forcastIconElement = document.querySelector(
+					"#forcast-emoji-" + index
+				);
+				forcastIconElement.setAttribute("src", forecastDay.condition.icon_url);
+				forcastIconElement.setAttribute("alt", forecastDay.condition.icon);
+			}
+		});
+	} else {
+		console.log(`${response.status}: Response Error`);
+	}
 }
 
-function convertCtoF(temp) {
-	return Math.round(temp * 1.8 + 32);
+function getDate(timestamp) {
+	let date = new Date(timestamp);
+	let dateArray = new Object();
+	dateArray["hours"] =
+		date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+	dateArray["minutes"] =
+		date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getHours();
+	dateArray["day"] = date.getDate();
+	dateArray["month"] = months[date.getMonth()];
+	dateArray["weekDay"] = days[date.getDay()];
+	return dateArray;
 }
 
 // **************
@@ -108,7 +175,6 @@ function convertCtoF(temp) {
 // https://www.shecodes.io/learn/workshops/1021/apis/weather
 let apiKey = "tb533a02o404f422da6058f58bb72fcc";
 
-let celsiusTemperature = null;
 let city = "Munich";
 
 let days = [
@@ -120,25 +186,26 @@ let days = [
 	"Friday",
 	"Saturday",
 ];
+let months = [
+	"Jan",
+	"Feb",
+	"Mar",
+	"Apr",
+	"May",
+	"Jun",
+	"Jul",
+	"Aug",
+	"Sep",
+	"Oct",
+	"Nov",
+	"Dec",
+];
 
 // **************
 // Main
 // **************
 
-// get current date
-let now = new Date();
-let day = days[now.getDay()];
-let hours = now.getHours();
-let minutes = now.getMinutes();
-if (hours < 10) {
-	hours = "0" + hours;
-}
-if (minutes < 10) {
-	minutes = "0" + minutes;
-}
-
-let currentDate = document.querySelector("#currentDate");
-currentDate.innerHTML = day + " " + hours + ":" + minutes;
+let forcastTemp = new Object();
 
 // Default weather search for Munich
 getWeatherFromAPIByCity(city);
@@ -150,11 +217,3 @@ searchForm.addEventListener("submit", getWeather4CityXY);
 // react to "get current location" button
 let currentLocation = document.querySelector("#CurrentLocation");
 currentLocation.addEventListener("click", getWeather4PositionXY);
-
-// react to fahrenheit link
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
-
-// react to celsius link
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", displayCelsiusTemperature);
