@@ -18,173 +18,180 @@
 	</head>
 	<body>
 		<!-- https://chessy969358.invisionapp.com/freehand/SheCodes-Weather-Website-7CxnuvCmO?dsid_h=3008d4dcd9c636e91fedd8604088ab77509649a1fee4cdec6c7ace57d47099b1&uid_h=dfddab8b9824e6b314d1587b113f6d262503027f6588464d15fc5dcad3f808a5 -->
-		<div class="container">
-			<div class="row" id="heading">
-				<div class="col">
-					<h1>my Weather</h1>
+		<div class="image-wrapper">
+			<div class="container">
+				<div class="row" id="heading">
+					<div class="col">
+						<h1>my Weather</h1>
+					</div>
+					<div class="col align-self-end">
+						<form action="" id="searchForm">
+							<div class="input-group mb-3">
+								<input
+									type="text"
+									class="form-control"
+									placeholder="get your weather in ..."
+									id="citySearch"
+									aria-label="City Search"
+									aria-describedby="basic-addon2"
+								/>
+								<div class="input-group-append">
+									<button
+										class="btn btn-outline-secondary"
+										type="submit"
+										id="citySearchButton"
+									>
+										<img
+											id="searchIcon"
+											src="images/search.svg"
+											alt=""
+											width="20"
+										/>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
-				<div class="col align-self-end">
-					<form action="" id="searchForm">
-						<div class="input-group mb-3">
-							<input
-								type="text"
-								class="form-control"
-								placeholder="get your weather in ..."
-								id="citySearch"
-								aria-label="City Search"
-								aria-describedby="basic-addon2"
-							/>
-							<div class="input-group-append">
-								<button
-									class="btn btn-outline-secondary"
-									type="submit"
-									id="citySearchButton"
-								>
-									<img
-										id="searchIcon"
-										src="images/search.svg"
-										alt=""
-										width="20"
-									/>
-								</button>
+				<div id="main">
+					<div class="row" id="currentCity">
+						<div class="col">
+							<p>Weather in <span id="currentCityName">Munich</span></p>
+						</div>
+						<div class="col text-right">
+							<a href="#" id="CurrentLocation"
+								><span
+									style="font-weight: normal"
+									title="find weather at current location"
+									>🚩</span
+								></a
+							>
+						</div>
+					</div>
+					<div class="row" id="currentWeather">
+						<div class="col">
+							<p>
+								<img src="" alt="Weather Icon" id="emoji" />
+								<span id="temperatureValue">11</span
+								><span class="units">°C</span>
+							</p>
+						</div>
+						<div class="col">
+							<ul>
+								<li><span id="description">Clear</span></li>
+								<li>Humidity: <span id="humidity">73</span>%</li>
+								<li>Wind: <span id="wind">2</span> km/h</li>
+							</ul>
+						</div>
+					</div>
+					<hr />
+					<div class="row" id="forcast">
+						<div class="col">
+							<div id="forcast-date-0">Nov. 4</div>
+							<div class="weekDay" id="forcast-day-0">tomorrow</div>
+							<div class="temperature temperatureMax">
+								<span class="temperatureLabel">max. </span>
+								<span class="temperatureValue" id="forcast-temp-max-0">15</span>
+								<span>°C</span>
+							</div>
+							<div class="temperature temperatureMin">
+								<span class="temperatureLabel">min. </span>
+								<span class="temperatureValue" id="forcast-temp-min-0">10</span>
+								<span>°C</span>
+							</div>
+							<div class="emoji">
+								<img src="" alt="Weather Icon" id="forcast-emoji-0" />
 							</div>
 						</div>
-					</form>
-				</div>
-			</div>
-			<div id="main">
-				<div class="row" id="currentCity">
-					<div class="col">
-						<p>Weather in <span id="currentCityName">Munich</span></p>
-					</div>
-					<div class="col text-right">
-						<a href="#" id="CurrentLocation"
-							><span
-								style="font-weight: normal"
-								title="find weather at current location"
-								>🚩</span
-							></a
-						>
-					</div>
-				</div>
-				<div class="row" id="currentWeather">
-					<div class="col">
-						<p>
-							<img src="" alt="Weather Icon" id="emoji" />
-							<span id="temperatureValue">11</span><span class="units">°C</span>
-						</p>
-					</div>
-					<div class="col">
-						<ul>
-							<li><span id="description">Clear</span></li>
-							<li>Humidity: <span id="humidity">73</span>%</li>
-							<li>Wind: <span id="wind">2</span> km/h</li>
-						</ul>
-					</div>
-				</div>
-				<hr />
-				<div class="row" id="forcast">
-					<div class="col">
-						<div id="forcast-date-0">Nov. 4</div>
-						<div class="weekDay" id="forcast-day-0">tomorrow</div>
-						<div class="temperature temperatureMax">
-							<span class="temperatureLabel">max. </span>
-							<span class="temperatureValue" id="forcast-temp-max-0">15</span>
-							<span>°C</span>
+						<div class="col">
+							<div id="forcast-date-1">Nov. 5</div>
+							<div class="weekDay" id="forcast-day-1">Sunday</div>
+							<div class="temperature temperatureMax">
+								<span class="temperatureLabel">max. </span>
+								<span class="temperatureValue" id="forcast-temp-max-1">15</span>
+								<span>°C</span>
+							</div>
+							<div class="temperature temperatureMin">
+								<span class="temperatureLabel">min. </span>
+								<span class="temperatureValue" id="forcast-temp-min-1">10</span>
+								<span>°C</span>
+							</div>
+							<div class="emoji">
+								<img src="" alt="Weather Icon" id="forcast-emoji-1" />
+							</div>
 						</div>
-						<div class="temperature temperatureMin">
-							<span class="temperatureLabel">min. </span>
-							<span class="temperatureValue" id="forcast-temp-min-0">10</span>
-							<span>°C</span>
+						<div class="col">
+							<div id="forcast-date-2">Nov. 6</div>
+							<div class="weekDay" id="forcast-day-2">Monday</div>
+							<div class="temperature temperatureMax">
+								<span class="temperatureLabel">max. </span>
+								<span class="temperatureValue" id="forcast-temp-max-2">15</span>
+								<span>°C</span>
+							</div>
+							<div class="temperature temperatureMin">
+								<span class="temperatureLabel">min. </span>
+								<span class="temperatureValue" id="forcast-temp-min-2">10</span>
+								<span>°C</span>
+							</div>
+							<div class="emoji">
+								<img src="" alt="Weather Icon" id="forcast-emoji-2" />
+							</div>
 						</div>
-						<div class="emoji">
-							<img src="" alt="Weather Icon" id="forcast-emoji-0" />
+						<div class="col">
+							<div id="forcast-date-3">Nov. 7</div>
+							<div class="weekDay" id="forcast-day-3">Tuesday</div>
+							<div class="temperature temperatureMax">
+								<span class="temperatureLabel">max. </span>
+								<span class="temperatureValue" id="forcast-temp-max-3">15</span>
+								<span>°C</span>
+							</div>
+							<div class="temperature temperatureMin">
+								<span class="temperatureLabel">min. </span>
+								<span class="temperatureValue" id="forcast-temp-min-3">10</span>
+								<span>°C</span>
+							</div>
+							<div class="emoji">
+								<img src="" alt="Weather Icon" id="forcast-emoji-3" />
+							</div>
 						</div>
-					</div>
-					<div class="col">
-						<div id="forcast-date-1">Nov. 5</div>
-						<div class="weekDay" id="forcast-day-1">Sunday</div>
-						<div class="temperature temperatureMax">
-							<span class="temperatureLabel">max. </span>
-							<span class="temperatureValue" id="forcast-temp-max-1">15</span>
-							<span>°C</span>
-						</div>
-						<div class="temperature temperatureMin">
-							<span class="temperatureLabel">min. </span>
-							<span class="temperatureValue" id="forcast-temp-min-1">10</span>
-							<span>°C</span>
-						</div>
-						<div class="emoji">
-							<img src="" alt="Weather Icon" id="forcast-emoji-1" />
-						</div>
-					</div>
-					<div class="col">
-						<div id="forcast-date-2">Nov. 6</div>
-						<div class="weekDay" id="forcast-day-2">Monday</div>
-						<div class="temperature temperatureMax">
-							<span class="temperatureLabel">max. </span>
-							<span class="temperatureValue" id="forcast-temp-max-2">15</span>
-							<span>°C</span>
-						</div>
-						<div class="temperature temperatureMin">
-							<span class="temperatureLabel">min. </span>
-							<span class="temperatureValue" id="forcast-temp-min-2">10</span>
-							<span>°C</span>
-						</div>
-						<div class="emoji">
-							<img src="" alt="Weather Icon" id="forcast-emoji-2" />
+						<div class="col">
+							<div id="forcast-date-4">Nov. 8</div>
+							<div class="weekDay" id="forcast-day-4">Wednesday</div>
+							<div class="temperature temperatureMax">
+								<span class="temperatureLabel">max. </span>
+								<span class="temperatureValue" id="forcast-temp-max-4">15</span>
+								<span>°C</span>
+							</div>
+							<div class="temperature temperatureMin">
+								<span class="temperatureLabel">min. </span>
+								<span class="temperatureValue" id="forcast-temp-min-4">10</span>
+								<span>°C</span>
+							</div>
+							<div class="emoji">
+								<img src="" alt="Weather Icon" id="forcast-emoji-4" />
+							</div>
 						</div>
 					</div>
-					<div class="col">
-						<div id="forcast-date-3">Nov. 7</div>
-						<div class="weekDay" id="forcast-day-3">Tuesday</div>
-						<div class="temperature temperatureMax">
-							<span class="temperatureLabel">max. </span>
-							<span class="temperatureValue" id="forcast-temp-max-3">15</span>
-							<span>°C</span>
-						</div>
-						<div class="temperature temperatureMin">
-							<span class="temperatureLabel">min. </span>
-							<span class="temperatureValue" id="forcast-temp-min-3">10</span>
-							<span>°C</span>
-						</div>
-						<div class="emoji">
-							<img src="" alt="Weather Icon" id="forcast-emoji-3" />
-						</div>
-					</div>
-					<div class="col">
-						<div id="forcast-date-4">Nov. 8</div>
-						<div class="weekDay" id="forcast-day-4">Wednesday</div>
-						<div class="temperature temperatureMax">
-							<span class="temperatureLabel">max. </span>
-							<span class="temperatureValue" id="forcast-temp-max-4">15</span>
-							<span>°C</span>
-						</div>
-						<div class="temperature temperatureMin">
-							<span class="temperatureLabel">min. </span>
-							<span class="temperatureValue" id="forcast-temp-min-4">10</span>
-							<span>°C</span>
-						</div>
-						<div class="emoji">
-							<img src="" alt="Weather Icon" id="forcast-emoji-4" />
-						</div>
+					<hr />
+					<div class="row">
+						<div id="graphic"></div>
 					</div>
 				</div>
-			</div>
-			<div id="footer">
-				<div class="row">
-					<div class="col">
-						<p>
-							<a
-								href="https://github.com/leon8889/SheCodes-WeatherApp"
-								target="_blank"
-								>Source code</a
-							>
-							by leon8889
-						</p>
-					</div>
-					<div class="col">
-						<p id="currentDate">Tuesday 16:00</p>
+				<div id="footer">
+					<div class="row">
+						<div class="col">
+							<p>
+								<a
+									href="https://github.com/leon8889/SheCodes-WeatherApp"
+									target="_blank"
+									>Source code</a
+								>
+								by leon8889
+							</p>
+						</div>
+						<div class="col">
+							<p id="currentDate">Tuesday 16:00</p>
+						</div>
 					</div>
 				</div>
 			</div>

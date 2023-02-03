@@ -107,6 +107,8 @@ function getWeatherForcastFromAPIByCity(city) {
 function changeWeatherForcastData(response) {
 	if (response.status == 200) {
 		let forecast = response.data.daily;
+		let forcastTemp = { Max: [], Min: [] };
+		let weekDays = [];
 
 		forecast.forEach(function (forecastDay, index) {
 			if (index < 5) {
@@ -128,18 +130,19 @@ function changeWeatherForcastData(response) {
 				}
 
 				// change temperature
+				let forcastTempMax = Math.round(forecastDay.temperature.maximum);
+				let forcastTempMin = Math.round(forecastDay.temperature.minimum);
 				let forcastTempMaxElement = document.querySelector(
 					"#forcast-temp-max-" + index
-				);
-				forcastTempMaxElement.innerHTML = Math.round(
-					forecastDay.temperature.maximum
 				);
 				let forcastTempMinElement = document.querySelector(
 					"#forcast-temp-min-" + index
 				);
-				forcastTempMinElement.innerHTML = Math.round(
-					forecastDay.temperature.minimum
-				);
+				forcastTempMaxElement.innerHTML = forcastTempMax;
+				forcastTempMinElement.innerHTML = forcastTempMin;
+				forcastTemp["Max"][index] = forcastTempMax;
+				forcastTemp["Min"][index] = forcastTempMin;
+				weekDays[index] = forcastDate["weekDayShort"];
 
 				// change icon
 				let forcastIconElement = document.querySelector(
@@ -149,6 +152,8 @@ function changeWeatherForcastData(response) {
 				forcastIconElement.setAttribute("alt", forecastDay.condition.icon);
 			}
 		});
+		// create Graphic
+		plotForcastGraphic(weekDays, forcastTemp);
 	} else {
 		console.log(`${response.status}: Response Error`);
 	}
@@ -160,11 +165,76 @@ function getDate(timestamp) {
 	dateArray["hours"] =
 		date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
 	dateArray["minutes"] =
-		date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getHours();
+		date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
 	dateArray["day"] = date.getDate();
 	dateArray["month"] = months[date.getMonth()];
 	dateArray["weekDay"] = days[date.getDay()];
+	dateArray["weekDayShort"] = daysShort[date.getDay()];
 	return dateArray;
+}
+
+function plotForcastGraphic(xAxis, forcastTemp) {
+	var trace1 = {
+		x: xAxis,
+		y: forcastTemp.Max,
+		type: "scatter",
+		name: "max.",
+		line: {
+			color: "#2B7EBA",
+			width: 1,
+		},
+		mode: "lines+text",
+		text: forcastTemp.Max,
+		textposition: "top center",
+		textfont: {
+			family: "Raleway, sans-serif",
+			size: "16",
+			color: "#10658e",
+		},
+	};
+
+	var trace2 = {
+		x: xAxis,
+		y: forcastTemp.Min,
+		type: "scatter",
+		name: "min.",
+		line: {
+			color: "#DB4052",
+			width: 1,
+		},
+		mode: "lines+text",
+		text: forcastTemp.Min,
+		textposition: "top center",
+		textfont: {
+			family: "Raleway, sans-serif",
+			size: "16",
+			color: "#bc3a47",
+		},
+	};
+
+	var layout = {
+		width: 750,
+		height: 350,
+		plot_bgcolor: "#c0deea",
+		paper_bgcolor: "#c0deea",
+		xaxis: {
+			title: "Week Days",
+			showgrid: false,
+			zeroline: false,
+		},
+		yaxis: {
+			title: "Temperature [°C]",
+			showline: false,
+			showticklabels: false,
+			range: [
+				Math.min.apply(Math, forcastTemp.Min) - 5,
+				Math.max.apply(Math, forcastTemp.Max) + 5,
+			],
+		},
+	};
+
+	var data = [trace1, trace2];
+	Plotly.newPlot("graphic", data, layout);
 }
 
 // **************
@@ -186,6 +256,7 @@ let days = [
 	"Friday",
 	"Saturday",
 ];
+let daysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let months = [
 	"Jan",
 	"Feb",
@@ -204,8 +275,6 @@ let months = [
 // **************
 // Main
 // **************
-
-let forcastTemp = new Object();
 
 // Default weather search for Munich
 getWeatherFromAPIByCity(city);
